@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 
 class Navigation extends Component {
   render() {
@@ -21,8 +22,8 @@ class Navigation extends Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <NavItem path="/" name="Home" />
-            <NavItem path="/" name="Explore" />
-            <NavItem path="/" name="Create a project" />
+            <NavItem path="/explore" name="Explore" />
+            <NavItem path="/create" name="Create a project" />
           </ul>
         </div>
       </nav>
@@ -36,10 +37,9 @@ function NavItem(props) {
   const aClassName = props.disabled ? "nav-link disabled" : "nav-link"
   return (
     <li className={liClassName}>
-      <a href={props.path} className={aClassName}>
-        {props.name}
+      <Link to={props.path} className={aClassName}>{props.name}
         {(props.path === pageURI) ? (<span className="sr-only">(current)</span>) : ''}
-      </a>
+      </Link>
     </li>
   );
 }
