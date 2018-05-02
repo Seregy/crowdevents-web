@@ -5,3 +5,7 @@
 .project-short-description {
   font-size: 0.8rem;
 }
+
+.project-time-left {
+  text-align: left;
+}

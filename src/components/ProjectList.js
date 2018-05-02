@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import moment from 'moment';
 import getSymbolFromCurrency from 'currency-symbol-map'
 import placeholderImage from "../image/placeholder.jpg";
 
@@ -11,6 +12,7 @@ class ProjectCard extends Component {
     const image = project.project_image || placeholderImage;
     const fundingGoal = (project.funding_goal ? project.funding_goal.amount : 1);
     const progress = Math.floor(project.raised.amount / fundingGoal * 100);
+    const timeLeft = moment(project.ends).diff(new moment(), 'days');
 
     return (
       <div className="project-card card my-3">
@@ -24,13 +26,14 @@ class ProjectCard extends Component {
               <div className="p-1">
                 <span className="font-weight-bold">{project.raised.amount + "" + getSymbolFromCurrency(project.raised.currency)}</span> 
               </div>
-              <div className="p-1 mr-auto text-muted">{project.raised.currency} raised</div>
+              <div className="p-1 mr-auto"><small className="text-muted">{project.raised.currency} raised</small></div>
               <div className="p-1 ml-auto">{progress}%</div>
             </div>
             <div className="progress mt-auto">
               <div className="progress-bar" style={{width: progress + '%'}} role="progressbar" aria-valuenow={project.raised.amount} aria-valuemin="0"
                 aria-valuemax={fundingGoal}></div>
             </div>
+            <small className="project-time-left p-1 text-muted">{timeLeft} days left</small>
           </div>
       </div>
     );
