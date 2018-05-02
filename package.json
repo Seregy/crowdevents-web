@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
+    "currency-symbol-map": "^4.0.4",
     "jquery": "^3.3.1",
     "npm": "^5.8.0",
     "popper.js": "^1.14.3",

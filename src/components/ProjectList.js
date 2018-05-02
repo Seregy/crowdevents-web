@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import getSymbolFromCurrency from 'currency-symbol-map'
 import placeholderImage from "../image/placeholder.jpg";
 
 import '../css/ProjectList.css';
@@ -21,7 +22,7 @@ class ProjectCard extends Component {
           <div className="project-funding-progress card-body d-flex flex-column">
             <div className="d-flex">
               <div className="p-1">
-                <span className="font-weight-bold">{project.raised.amount}</span> 
+                <span className="font-weight-bold">{project.raised.amount + "" + getSymbolFromCurrency(project.raised.currency)}</span> 
               </div>
               <div className="p-1 mr-auto text-muted">{project.raised.currency} raised</div>
               <div className="p-1 ml-auto">{progress}%</div>
