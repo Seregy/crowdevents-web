@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import moment from 'moment';
+
 import getSymbolFromCurrency from 'currency-symbol-map'
 import placeholderImage from "../image/placeholder.jpg";
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
+import faCircle from '@fortawesome/fontawesome-free-solid/faCircle';
 
 import '../css/ProjectList.css';
 
@@ -16,9 +22,19 @@ class ProjectCard extends Component {
 
     return (
       <div className="project-card card my-3">
-        <img className="project-img card-img-top" src={image} alt=""/>
+        <div className="project-img-wrapper">
+          <Link className="card-title-link" to={"/project/" + project.id}>
+            <img className="project-img card-img-top" src={image} alt=""/>
+          </Link>
+        <span className="project-follow-icon fa-layers fa-fw">
+          <FontAwesomeIcon className="circle-icon" icon={faCircle} transform="inverse grow-12" />
+          <Link to="/"><FontAwesomeIcon className="heart-icon" icon={faHeart}/></Link>
+        </span>
+        </div>
           <div className="card-body">
-            <h5 className="card-title">{project.name}</h5>
+            <Link className="card-title-link" to={"/project/" + project.id}>
+              <h5 className="card-title">{project.name}</h5>
+            </Link>
             <p className="project-short-description card-text text-secondary">{project.short_description}</p>
           </div>
           <div className="project-funding-progress card-body d-flex flex-column">

@@ -2,10 +2,41 @@
   width: 18rem;
 }
 
+.card-title-link {
+  color: inherit;
+}
+
 .project-short-description {
   font-size: 0.8rem;
 }
 
 .project-time-left {
   text-align: left;
+}
+
+.project-img-wrapper {
+  position: relative;
+}
+
+.project-img-wrapper .project-follow-icon {
+  color: whitesmoke;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.project-follow-icon a:link {
+  color: inherit;
+}
+
+.project-follow-icon a:visited {
+  color: inherit;
+}
+
+.project-follow-icon a:hover  {
+  color: royalblue;
+}
+
+.circle-icon {
+  color: rgba(0, 0, 0, 0.4);
 }
