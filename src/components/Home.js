@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navigation from './Navigation';
 import ProjectList from './ProjectList';
+import Footer from './Footer';
 
 class Home extends Component {
   render() {
@@ -12,10 +13,6 @@ class Home extends Component {
       </div>
     );
   }
-}
-
-function Footer(props) {
-  return <div className="footer" />;
 }
 
 export default Home;

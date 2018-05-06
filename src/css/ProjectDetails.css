@@ -1,0 +1,42 @@
+.project-details {
+  text-align: left;
+}
+
+.project-details .header {
+  text-align: center;
+} 
+
+.project-owner-image {
+  border-radius: 50%;
+}
+
+.project-short-description {
+  height: 100%;
+}
+
+.location {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.category {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.project-info {
+  height: 100%;
+}
+
+.project-details .info-block {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.project-details .contribute {
+  color: whitesmoke;
+}
+
+.project-details .info-block .primary {
+  font-size: 1.25rem;
+}

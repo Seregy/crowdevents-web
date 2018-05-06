@@ -12,10 +12,12 @@
     "currency-symbol-map": "^4.0.4",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
+    "moment-duration-format": "^2.2.2",
     "npm": "^5.8.0",
     "popper.js": "^1.14.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-geocode": "0.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4"
   },

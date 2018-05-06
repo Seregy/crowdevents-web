@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navigation from './Navigation';
-import ProjectList from './ProjectList';
+import Footer from './Footer';
 
 class Explore extends Component {
   render() {
@@ -11,10 +11,6 @@ class Explore extends Component {
       </div>
     );
   }
-}
-
-function Footer(props) {
-  return <div className="footer" />;
 }
 
 export default Explore;

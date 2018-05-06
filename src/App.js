@@ -7,7 +7,7 @@ import "bootstrap";
 
 import Home from './components/Home';
 import Explore from './components/Explore';
-import Project from './components/Project';
+import Project from './Project';
 
 class App extends Component {
   render() {
@@ -19,14 +19,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-function chunkArrayInGroups(arr, size) {
-  var myArray = [];
-  for(var i = 0; i < arr.length; i += size) {
-    myArray.push(arr.slice(i, i+size));
-  }
-  return myArray;
 }
 
 export default App;

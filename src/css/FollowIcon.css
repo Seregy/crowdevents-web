@@ -1,0 +1,22 @@
+.follow-icon {
+  color: whitesmoke;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.follow-icon a:link {
+  color: inherit;
+}
+
+.follow-icon a:visited {
+  color: inherit;
+}
+
+.follow-icon a:hover  {
+  color: royalblue;
+}
+
+.circle-icon {
+  color: rgba(0, 0, 0, 0.4);
+}

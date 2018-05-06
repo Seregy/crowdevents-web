@@ -2,23 +2,25 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import moment from 'moment';
-
+import momentDurationFormatSetup from 'moment-duration-format';
 import getSymbolFromCurrency from 'currency-symbol-map'
-import placeholderImage from "../image/placeholder.jpg";
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
-import faCircle from '@fortawesome/fontawesome-free-solid/faCircle';
+import FollowIcon from './FollowIcon';
+
+import placeholderImage from "../image/placeholder.jpg";
 
 import '../css/ProjectList.css';
 
 class ProjectCard extends Component { 
   render() {
+    momentDurationFormatSetup(moment);
     const project = this.props.project;
     const image = project.project_image || placeholderImage;
     const fundingGoal = (project.funding_goal ? project.funding_goal.amount : 1);
     const progress = Math.floor(project.raised.amount / fundingGoal * 100);
-    const timeLeft = moment(project.ends).diff(new moment(), 'days');
+    const timeLeft = moment
+                      .duration(moment(project.ends).diff(new moment()))
+                      .format();
 
     return (
       <div className="project-card card my-3">
@@ -26,10 +28,11 @@ class ProjectCard extends Component {
           <Link className="card-title-link" to={"/project/" + project.id}>
             <img className="project-img card-img-top" src={image} alt=""/>
           </Link>
-        <span className="project-follow-icon fa-layers fa-fw">
+        {/* <span className="project-follow-icon fa-layers fa-fw">
           <FontAwesomeIcon className="circle-icon" icon={faCircle} transform="inverse grow-12" />
           <Link to="/"><FontAwesomeIcon className="heart-icon" icon={faHeart}/></Link>
-        </span>
+        </span> */}
+        <FollowIcon />
         </div>
           <div className="card-body">
             <Link className="card-title-link" to={"/project/" + project.id}>
@@ -49,7 +52,7 @@ class ProjectCard extends Component {
               <div className="progress-bar" style={{width: progress + '%'}} role="progressbar" aria-valuenow={project.raised.amount} aria-valuemin="0"
                 aria-valuemax={fundingGoal}></div>
             </div>
-            <small className="project-time-left p-1 text-muted">{timeLeft} days left</small>
+            <small className="project-time-left p-1 text-muted">{timeLeft} left</small>
           </div>
       </div>
     );
