@@ -18,6 +18,8 @@ import faCalendarAlt from "@fortawesome/fontawesome-free-regular/faCalendarAlt";
 
 import "../css/ProjectDetails.css";
 
+import avatarPlaceholder from "../image/avatar_placeholder.png";
+
 class ProjectDetails extends Component {
   constructor(props) {
     super(props);
@@ -195,13 +197,14 @@ function ProjectSideInfo(props) {
     .format();
 
   const owner = project.owner;
+  const ownerImage = owner.image_link || avatarPlaceholder;
 
   return (
     <div className="project-info px-2 d-flex flex-column flex-fill text-left">
       <div className="project-owner info-block">
         <div className="d-flex">
-            <img className="image" src={project.owner.image_link} />
           <Link className="image-link" to={"person/" + owner.id}>
+            <img className="image" src={ownerImage} />
           </Link>
           <div className="d-flex flex-column pl-3">
             <Link className="owner-link" to={"person/" + owner.id}>
