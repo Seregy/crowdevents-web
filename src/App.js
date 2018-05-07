@@ -5,17 +5,17 @@ import "./css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-import Home from "./components/Home";
-import Explore from "./components/Explore";
-import Project from "./Project";
+import Navigation from "./components/Navigation";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
     return (
-      <div className="App container">
-        <Route exact path="/" component={Home} />
-        <Route path="/explore" component={Explore} />
-        <Route path="/project/:id" component={Project} />
+      <div className="app container">
+        <Navigation />
+        <Main />
+        <Footer />
       </div>
     );
   }
