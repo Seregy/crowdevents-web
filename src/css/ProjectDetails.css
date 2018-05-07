@@ -26,10 +26,14 @@
   height: 100%;
 }
 
-.project-owner a {
+.project-owner .image-link {
   color: inherit;
   width: 15%;
   height: auto;
+}
+
+.project-owner .owner-link {
+  color: inherit;
 }
 
 .project-owner .image {

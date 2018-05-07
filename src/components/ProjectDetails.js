@@ -200,11 +200,11 @@ function ProjectSideInfo(props) {
     <div className="project-info px-2 d-flex flex-column flex-fill text-left">
       <div className="project-owner info-block">
         <div className="d-flex">
-          <Link to={"person/" + owner.id}>
             <img className="image" src={project.owner.image_link} />
+          <Link className="image-link" to={"person/" + owner.id}>
           </Link>
           <div className="d-flex flex-column pl-3">
-            <Link to={"person/" + owner.id}>
+            <Link className="owner-link" to={"person/" + owner.id}>
               {owner.name} {owner.surname ? owner.surname : ""}
             </Link>
             <div className="text-muted">Project owner</div>
