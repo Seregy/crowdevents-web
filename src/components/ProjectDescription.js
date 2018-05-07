@@ -79,6 +79,8 @@ function ProjectTabs(props) {
     return <CommentsTab projectId={props.project.id} />;
   } else if (props.tab === "faq") {
     return <FaqsTab projectId={props.project.id} />;
+  } else if (props.tab === "updates") {
+    return <UpdatesTab projectId={props.project.id} />;
   }
 }
 
@@ -143,7 +145,7 @@ class CommentsTab extends Component {
 
 function Comment(props) {
   const comment = props.comment;
-  const time = moment(comment.date_time).fromNow();
+  const time = moment(comment.posted).fromNow();
   const image = comment.author.image_link || avatarPlaceholder;
 
   return (
@@ -279,7 +281,7 @@ class UpdatesTab extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      comments: []
+      updates: []
     };
   }
 
@@ -288,7 +290,7 @@ class UpdatesTab extends Component {
       .get(
         "http://127.0.0.1:8080/v0/projects/" +
           this.props.projectId +
-          "/comments",
+          "/updates",
         {
           crossdomain: true
         }
@@ -297,7 +299,7 @@ class UpdatesTab extends Component {
         result => {
           this.setState({
             isLoaded: true,
-            comments: result.data.content
+            updates: result.data.content
           });
         },
         error => {
@@ -310,8 +312,8 @@ class UpdatesTab extends Component {
   }
 
   render() {
-    const { comments, error, isLoaded } = this.state;
-    console.log(comments);
+    const { updates, error, isLoaded } = this.state;
+    console.log(updates);
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -320,12 +322,63 @@ class UpdatesTab extends Component {
     } else {
       return (
         <div>
-          {comments.map(comment => (
-            <Comment comment={comment} key={comment.id} />
-          ))}
+          {updates.map(update => <Update update={update} key={update.id} />)}
         </div>
       );
     }
+  }
+}
+
+class Update extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      update: {}
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://127.0.0.1:8080/v0/updates/" + this.props.update.id, {
+        crossdomain: true
+      })
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            update: result.data
+          });
+        },
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      );
+  }
+
+  render() {
+    const { isLoaded: isMessageLoaded, error } = this.state;
+
+    const update = this.props.update;
+    const formattedTime = moment(update.posted).toLocaleString();
+    const fromNow = moment(update.posted).fromNow();
+
+    return (
+      <div className="update">
+        <div className="update-header">
+          {formattedTime}
+          {fromNow}
+        </div>
+        <div className="short-message">{update.short_message}</div>
+        <div className="full-message">
+          {isMessageLoaded ? this.state.update.message || error : "Loading..."}
+        </div>
+      </div>
+    );
   }
 }
 
