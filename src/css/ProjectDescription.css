@@ -1,0 +1,27 @@
+.project-description {
+  padding-top: 1rem;
+}
+
+.project-description .comment:target {
+  background-color: lavender;
+}
+
+.project-description .comment .image-link {
+  display: inline-block;
+  color: inherit;
+  width: 75%;
+  height: auto;
+}
+
+.project-description .comment .image {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.project-description .comment .author-link {
+  color: inherit;
+}
+
+.project-description .comment .comment-link {
+  color: inherit;
+}

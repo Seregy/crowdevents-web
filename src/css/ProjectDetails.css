@@ -48,3 +48,7 @@
 .project-details .info-block .primary {
   font-size: 1.25rem;
 }
+
+.project-description .navigation {
+  padding-top: 2rem;
+}

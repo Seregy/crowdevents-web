@@ -6,6 +6,7 @@ import getSymbolFromCurrency from "currency-symbol-map";
 import Geocode from "react-geocode";
 
 import ProjectGallery from "./ProjectGallery";
+import ProjectDescription from "./ProjectDescription";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
@@ -111,6 +112,14 @@ class ProjectDetails extends Component {
             </div>
             <div className="col-4">
               <ProjectSideInfo project={project} />
+            </div>
+          </div>
+          <div className="project-description row">
+            <div className="col-8">
+              <ProjectDescription
+                project={project}
+                currentTab={this.props.currentTab}
+              />
             </div>
           </div>
         </div>
