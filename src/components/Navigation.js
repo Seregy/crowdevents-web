@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class Navigation extends Component {
   render() {
@@ -15,7 +15,8 @@ class Navigation extends Component {
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
 
@@ -32,13 +33,18 @@ class Navigation extends Component {
 }
 
 function NavItem(props) {
-  const pageURI = window.location.pathname + window.location.search
-  const liClassName = (props.path === pageURI) ? "nav-item active" : "nav-item";
-  const aClassName = props.disabled ? "nav-link disabled" : "nav-link"
+  const pageURI = window.location.pathname + window.location.search;
+  const liClassName = props.path === pageURI ? "nav-item active" : "nav-item";
+  const aClassName = props.disabled ? "nav-link disabled" : "nav-link";
   return (
     <li className={liClassName}>
-      <Link to={props.path} className={aClassName}>{props.name}
-        {(props.path === pageURI) ? (<span className="sr-only">(current)</span>) : ''}
+      <Link to={props.path} className={aClassName}>
+        {props.name}
+        {props.path === pageURI ? (
+          <span className="sr-only">(current)</span>
+        ) : (
+          ""
+        )}
       </Link>
     </li>
   );
