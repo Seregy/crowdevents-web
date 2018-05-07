@@ -2,6 +2,19 @@
   padding-top: 1rem;
 }
 
+.project-description .nav {
+  margin-bottom: 1rem;
+}
+
+.project-description .faq .btn {
+  text-align: left;
+  color: inherit;
+}
+
+.project-description .faq {
+  margin-bottom: 1rem;
+}
+
 .project-description .comment:target {
   background-color: lavender;
 }
