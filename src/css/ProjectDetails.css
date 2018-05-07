@@ -6,31 +6,39 @@
   text-align: center;
 } 
 
-.project-owner-image {
-  border-radius: 50%;
+.project-details .location {
+  color: inherit;
+}
+
+.project-details .event-date {
+  color: inherit;
+}
+
+.project-details .category {
+  color: inherit;
 }
 
 .project-short-description {
   height: 100%;
 }
 
-.location {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.category {
-  color: inherit;
-  text-decoration: inherit;
-}
-
 .project-info {
   height: 100%;
 }
 
+.project-owner a {
+  color: inherit;
+  width: 15%;
+  height: auto;
+}
+
+.project-owner .image {
+  border-radius: 50%;
+  width: 100%;
+}
+
 .project-details .info-block {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  margin-top: auto;
 }
 
 .project-details .contribute {
