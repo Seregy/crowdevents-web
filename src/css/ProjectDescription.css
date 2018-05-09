@@ -9,6 +9,7 @@
 .project-description .faq .btn {
   text-align: left;
   color: inherit;
+  white-space: normal;
 }
 
 .project-description .faq {
