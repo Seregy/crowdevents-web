@@ -321,7 +321,7 @@ class UpdatesTab extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div>
+        <div className="updates">
           {updates.map(update => <Update update={update} key={update.id} />)}
         </div>
       );
@@ -335,8 +335,17 @@ class Update extends Component {
     this.state = {
       error: null,
       isLoaded: false,
+      readMoreExpanded: false,
       update: {}
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      readMoreExpanded: !prevState.readMoreExpanded
+    }));
   }
 
   componentDidMount() {
@@ -361,21 +370,35 @@ class Update extends Component {
   }
 
   render() {
-    const { isLoaded: isMessageLoaded, error } = this.state;
+    const { readMoreExpanded, isLoaded: isMessageLoaded, error } = this.state;
 
     const update = this.props.update;
-    const formattedTime = moment(update.posted).toLocaleString();
+    const formattedTime = moment(update.posted).format("MMMM Do, hh:mm");
     const fromNow = moment(update.posted).fromNow();
 
+    const readMoreLessText = readMoreExpanded ? "Read less" : "Read more";
+
     return (
-      <div className="update">
-        <div className="update-header">
-          {formattedTime}
-          {fromNow}
-        </div>
-        <div className="short-message">{update.short_message}</div>
-        <div className="full-message">
-          {isMessageLoaded ? this.state.update.message || error : "Loading..."}
+      <div className="update card mb-3">
+        <div className="card-body">
+          <h5 className="update-header card-title">
+            {update.title}
+          </h5>
+          <p className="short-message card-text">
+            {update.short_message}
+          </p>
+          <div className="collapse" id={"update-msg-" + update.id}>
+            <p className="full-message card-text">
+              {isMessageLoaded ? this.state.update.message || error : "Loading..."}
+            </p>
+          </div>
+          <a className="btn btn-link" onClick={this.handleClick} data-toggle="collapse" href={"#update-msg-" + update.id} role="button" aria-expanded="false" aria-controls={"update-msg-" + update.id}>
+            {readMoreLessText}
+          </a>
+          <p className="card-text d-flex">
+            <small className="text-muted">{formattedTime}</small>
+            <small className="text-muted ml-auto">{fromNow}</small>
+          </p>
         </div>
       </div>
     );
