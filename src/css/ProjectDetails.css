@@ -1,58 +1,41 @@
 .project-details {
+  padding-top: 1rem;
+}
+
+.project-details .nav {
+  margin-bottom: 1rem;
+}
+
+.project-details .faq .btn {
   text-align: left;
-}
-
-.project-details .header {
-  text-align: center;
-}
-
-.project-details .location {
   color: inherit;
+  white-space: normal;
 }
 
-.project-details .event-date {
+.project-details .faq {
+  margin-bottom: 1rem;
+}
+
+.project-details .comment:target {
+  background-color: lavender;
+}
+
+.project-details .comment .image-link {
+  display: inline-block;
   color: inherit;
-}
-
-.project-details .category {
-  color: inherit;
-}
-
-.project-short-description {
-  height: 100%;
-}
-
-.project-info {
-  height: 100%;
-}
-
-.project-owner .image-link {
-  color: inherit;
-  width: 15%;
+  width: 75%;
   height: auto;
 }
 
-.project-owner .owner-link {
-  color: inherit;
-}
-
-.project-owner .image {
+.project-details .comment .image {
   border-radius: 50%;
   width: 100%;
 }
 
-.project-details .info-block {
-  margin-top: auto;
+.project-details .comment .author-link {
+  color: inherit;
 }
 
-.project-details .contribute {
-  color: whitesmoke;
-}
-
-.project-details .info-block .primary {
-  font-size: 1.25rem;
-}
-
-.project-description .navigation {
-  padding-top: 2rem;
+.project-details .comment .comment-link {
+  color: inherit;
 }

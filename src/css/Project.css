@@ -1,0 +1,58 @@
+.project {
+  text-align: left;
+}
+
+.project .header {
+  text-align: center;
+}
+
+.project .location {
+  color: inherit;
+}
+
+.project .event-date {
+  color: inherit;
+}
+
+.project .category {
+  color: inherit;
+}
+
+.project-short-description {
+  height: 100%;
+}
+
+.project-info {
+  height: 100%;
+}
+
+.project-owner .image-link {
+  color: inherit;
+  width: 15%;
+  height: auto;
+}
+
+.project-owner .owner-link {
+  color: inherit;
+}
+
+.project-owner .image {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.project .info-block {
+  margin-top: auto;
+}
+
+.project .contribute {
+  color: whitesmoke;
+}
+
+.project .info-block .primary {
+  font-size: 1.25rem;
+}
+
+.project-description .navigation {
+  padding-top: 2rem;
+}
