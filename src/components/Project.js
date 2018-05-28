@@ -7,6 +7,7 @@ import Geocode from "react-geocode";
 
 import ProjectDetails from "./ProjectDetails";
 import ProjectGallery from "./ProjectGallery";
+import ProjectRewards from "./ProjectRewards";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
@@ -122,6 +123,9 @@ class Project extends Component {
                 project={project}
                 currentTab={this.props.match.params.tab}
               />
+            </div>
+            <div className="col-4">
+              <ProjectRewards project={project} />
             </div>
           </div>
         </div>
