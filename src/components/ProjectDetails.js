@@ -29,53 +29,74 @@ function ProjectDetails(props) {
 
   return (
     <div className="project-details">
-      <ProjectNavigation active={currentTab} projectId={props.project.id} />
+      <ProjectNavigation active={currentTab} project={props.project} />
       <ProjectTabs tab={currentTab} project={props.project} />
     </div>
   );
 }
 
 function ProjectNavigation(props) {
-  const baseClass = "nav-link";
-  const activeClass = " active";
-  const descriptionClass =
-    baseClass + (props.active === "description" ? activeClass : "");
-  const faqClass = baseClass + (props.active === "faq" ? activeClass : "");
-  const updatesClass =
-    baseClass + (props.active === "updates" ? activeClass : "");
-  const commentsClass =
-    baseClass + (props.active === "comments" ? activeClass : "");
+  const projectId = props.project.id;
+
+  const commentsEnabled = props.project.comments.length > 0;
+  const faqEnabled = props.project.faqs.length > 0;
+  const updatesEnabled = props.project.updates.length > 0;
+
+  let descriptionLink = "/project/" + projectId;
+  let faqLink = "/project/" + projectId + "/faq";
+  let updatesLink = "/project/" + projectId + "/updates"
+  let commentsLink = "/project/" + projectId + "/comments";
 
   return (
     <ul className="nav nav-tabs">
-      <li className="nav-item">
-        <Link className={descriptionClass} to={"/project/" + props.projectId}>
-          Description
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className={faqClass} to={"/project/" + props.projectId + "/faq"}>
-          FAQ
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className={updatesClass}
-          to={"/project/" + props.projectId + "/updates"}
-        >
-          Updates
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className={commentsClass}
-          to={"/project/" + props.projectId + "/comments"}
-        >
-          Comments
-        </Link>
-      </li>
+      <ProjectNavItem link={descriptionLink} title="Description" active={props.active === "description"} enabled={true}/>
+      <ProjectNavItem link={faqLink} title="FAQ" active={props.active === "faq"} enabled={faqEnabled}/>
+      <ProjectNavItem link={updatesLink} title="Updates" active={props.active === "updates"} enabled={updatesEnabled}/>
+      <ProjectNavItem link={commentsLink} title="Comments" active={props.active === "comments"} enabled={commentsEnabled}/>
     </ul>
   );
+}
+
+function ProjectNavItem(props) {
+  let link = props.link;
+  const title = props.title;
+  const active = props.active;
+  const enabled = props.enabled;
+
+  const baseItemClass = "nav-item";
+  const baseLinkClass = "nav-link";
+  const activeClass = "active";
+  const disableClass = "disabled";
+
+  let linkClass = baseLinkClass;
+  if (active) {
+    linkClass = linkClass + " " + activeClass;
+  }
+
+  let itemClass = baseItemClass;
+
+  if (enabled) {
+    return (
+      <li className={itemClass}>
+        <Link
+          className={linkClass}
+          to={link}
+        >
+          {title}
+        </Link>
+      </li>
+    );
+  } else {
+    return (
+      <li className={itemClass}>
+        <a
+          className={linkClass + " " + disableClass}
+        >
+          {title}
+        </a>
+      </li>
+    );
+  }
 }
 
 function ProjectTabs(props) {
