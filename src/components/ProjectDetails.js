@@ -91,7 +91,7 @@ function ProjectTabs(props) {
 }
 
 function DescriptionTab(props) {
-  return <p>{props.description}</p>;
+  return <p className="full-description">{props.description}</p>;
 }
 
 class CommentsTab extends Component {

@@ -6,6 +6,10 @@
   margin-bottom: 1rem;
 }
 
+.project-details .full-description {
+  white-space: pre-wrap;
+}
+
 .project-details .faq .btn {
   text-align: left;
   color: inherit;
