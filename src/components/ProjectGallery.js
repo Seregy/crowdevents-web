@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import FollowIcon from "./FollowIcon";
 
+import "../css/ProjectGallery.css";
+
 class ProjectGallery extends Component {
   render() {
     const images = this.props.images || [];
