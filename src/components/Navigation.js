@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from 'react-intl';
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
@@ -26,21 +27,37 @@ class Navigation extends Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mr-auto">
             <NavItemLink path="/">
-            Головна
+              <FormattedMessage
+                id="app.navigation.home"
+                defaultMessage="Home"
+              />
             </NavItemLink>
             <NavItemLink path="/explore">
-            Більше проектів
+              <FormattedMessage
+                id="app.navigation.explore"
+                defaultMessage="Explore"
+              />
             </NavItemLink>
             <NavItemLink path="/create">
-            Створити проект
+              <FormattedMessage
+                id="app.navigation.create"
+                defaultMessage="Create"
+              />
             </NavItemLink>
           </ul>
           <ul className="navbar-nav">
             <button className="nav-item ml-auto btn btn-link nav-link">
-            Пошук <FontAwesomeIcon className="search-icon" icon={faSearch} />
+            <FormattedMessage
+              id="app.navigation.search"
+              defaultMessage="Search"
+            />
+            <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </button>
             <NavItemLink path="/login">
-            Увійти
+              <FormattedMessage
+                id="app.navigation.login"
+                defaultMessage="Login"
+              />
             </NavItemLink>
           </ul>
         </div>
