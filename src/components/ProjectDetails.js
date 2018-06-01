@@ -49,10 +49,10 @@ function ProjectNavigation(props) {
 
   return (
     <ul className="nav nav-tabs">
-      <ProjectNavItem link={descriptionLink} title="Description" active={props.active === "description"} enabled={true}/>
-      <ProjectNavItem link={faqLink} title="FAQ" active={props.active === "faq"} enabled={faqEnabled}/>
-      <ProjectNavItem link={updatesLink} title="Updates" active={props.active === "updates"} enabled={updatesEnabled}/>
-      <ProjectNavItem link={commentsLink} title="Comments" active={props.active === "comments"} enabled={commentsEnabled}/>
+      <ProjectNavItem link={descriptionLink} title="Опис" active={props.active === "description"} enabled={true}/>
+      <ProjectNavItem link={faqLink} title="ЧаПи" active={props.active === "faq"} enabled={faqEnabled}/>
+      <ProjectNavItem link={updatesLink} title="Оновлення" active={props.active === "updates"} enabled={updatesEnabled}/>
+      <ProjectNavItem link={commentsLink} title="Коментарі" active={props.active === "comments"} enabled={commentsEnabled}/>
     </ul>
   );
 }

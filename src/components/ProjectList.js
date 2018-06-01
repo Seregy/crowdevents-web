@@ -53,7 +53,7 @@ class ProjectCard extends Component {
             </div>
             <div className="p-1 mr-auto">
               <small className="text-muted">
-                {project.raised.currency} raised
+                {project.raised.currency} зібрано
               </small>
             </div>
             <div className="p-1 ml-auto">{progress}%</div>
@@ -69,7 +69,7 @@ class ProjectCard extends Component {
             />
           </div>
           <small className="project-time-left p-1 text-muted">
-            {timeLeft} left
+            {timeLeft} залишилось
           </small>
         </div>
       </div>
@@ -117,7 +117,7 @@ class ProjectList extends Component {
 
       return rows.map(row => (
         <div className="row">
-          <div className="card-deck">
+          <div className="card-deck col-12">
             {row.map(project => (
               <ProjectCard project={project} key={project.id} />
             ))}

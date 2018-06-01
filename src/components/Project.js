@@ -213,7 +213,7 @@ function ProjectSideInfo(props) {
             <Link className="owner-link" to={"person/" + owner.id}>
               {owner.name} {owner.surname ? owner.surname : ""}
             </Link>
-            <div className="text-muted">Project owner</div>
+            <div className="text-muted">Власник проекту</div>
           </div>
       </div>
       <div className="info-block progress">
@@ -230,9 +230,9 @@ function ProjectSideInfo(props) {
         <span className="primary text-primary">
           {raised.amount + "" + getSymbolFromCurrency(raised.currency)}{" "}
         </span>
-        <span className="">{raised.currency} raised</span>
+        <span className="">{raised.currency} зібрано</span>
         <div className="text-muted">
-          {progress}% of{" "}
+          {progress}% від{" "}
           {fundingGoal.amount +
             "" +
             getSymbolFromCurrency(fundingGoal.currency)}
@@ -240,18 +240,18 @@ function ProjectSideInfo(props) {
       </div>
       <div className="info-block">
         <span className="primary">{project.contributions.length}</span>
-        <div className="text-muted">contributors</div>
+        <div className="text-muted">вкладник</div>
       </div>
       <div className="info-block">
         <span className="primary">{timeLeft}</span>
-        <div className="text-muted">left</div>
+        <div className="text-muted">залишилось</div>
       </div>
       <div className="info-block contribute">
         <Link
           to={"/contribute/" + project.id}
           className="btn btn-primary w-100"
         >
-          Contribute to the project
+          Зробити внесок
         </Link>
       </div>
       <div className="info-block d-flex">
