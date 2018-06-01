@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
+
 class Navigation extends Component {
   render() {
     return (
@@ -21,10 +24,16 @@ class Navigation extends Component {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
+            <NavItemLink path="/" name="Головна" />
+            <NavItemLink path="/explore" name="Більше проектів" />
+            <NavItemLink path="/create" name="Створити проект" />
+          </ul>
           <ul className="navbar-nav">
-            <NavItem path="/" name="Home" />
-            <NavItem path="/explore" name="Explore" />
-            <NavItem path="/create" name="Create a project" />
+            <button className="nav-item ml-auto btn btn-link nav-link">
+            Пошук <FontAwesomeIcon className="search-icon" icon={faSearch} />
+            </button>
+            <NavItemLink path="/login" name="Увійти"/>
           </ul>
         </div>
       </nav>
@@ -32,7 +41,7 @@ class Navigation extends Component {
   }
 }
 
-function NavItem(props) {
+function NavItemLink(props) {
   const pageURI = window.location.pathname + window.location.search;
   const liClassName = props.path === pageURI ? "nav-item active" : "nav-item";
   const aClassName = props.disabled ? "nav-link disabled" : "nav-link";
