@@ -5,6 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
 
+import "../css/Navigation.css";
+
 class Navigation extends Component {
   render() {
     return (
