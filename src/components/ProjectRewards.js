@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import getSymbolFromCurrency from "currency-symbol-map";
 
+import "../css/ProjectRewards.css";
+
 function ProjectRewards(props) {
   const project = props.project;
   const rewards = project.rewards;
