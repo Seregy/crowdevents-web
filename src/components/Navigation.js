@@ -25,15 +25,23 @@ class Navigation extends Component {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mr-auto">
-            <NavItemLink path="/" name="Головна" />
-            <NavItemLink path="/explore" name="Більше проектів" />
-            <NavItemLink path="/create" name="Створити проект" />
+            <NavItemLink path="/">
+            Головна
+            </NavItemLink>
+            <NavItemLink path="/explore">
+            Більше проектів
+            </NavItemLink>
+            <NavItemLink path="/create">
+            Створити проект
+            </NavItemLink>
           </ul>
           <ul className="navbar-nav">
             <button className="nav-item ml-auto btn btn-link nav-link">
             Пошук <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </button>
-            <NavItemLink path="/login" name="Увійти"/>
+            <NavItemLink path="/login">
+            Увійти
+            </NavItemLink>
           </ul>
         </div>
       </nav>
@@ -48,7 +56,7 @@ function NavItemLink(props) {
   return (
     <li className={liClassName}>
       <Link to={props.path} className={aClassName}>
-        {props.name}
+        {props.children}
         {props.path === pageURI ? (
           <span className="sr-only">(current)</span>
         ) : (
