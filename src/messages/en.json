@@ -1,0 +1,7 @@
+{
+  "app.navigation.home": "Home",
+  "app.navigation.explore": "Explore",
+  "app.navigation.create": "Create project",
+  "app.navigation.search": "Search",
+  "app.navigation.login": "Login"
+}
