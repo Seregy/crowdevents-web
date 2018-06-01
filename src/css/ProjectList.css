@@ -17,3 +17,8 @@
 .project-img-wrapper {
   position: relative;
 }
+
+.project-card img {
+  max-height: 360px;
+  object-fit: cover;
+}
