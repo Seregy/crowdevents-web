@@ -78,7 +78,7 @@ class ProjectCard extends Component {
               </small>
             </div>
             <div className="p-1 ml-auto">
-              <FormattedNumber value={progress / 100} style="percent"/>
+              <FormattedNumber value={progress / 100} style="percent" />
             </div>
           </div>
           <div className="progress mt-auto">

@@ -149,8 +149,8 @@ class CommentsTab extends Component {
     axios
       .get(
         "http://127.0.0.1:8080/v0/projects/" +
-          this.props.projectId +
-          "/comments",
+        this.props.projectId +
+        "/comments",
         {
           crossdomain: true
         }
@@ -225,7 +225,7 @@ function Comment(props) {
           </Link>
           <span className="text-muted pl-2">
             <a className="comment-link" href={"#" + comment.id}>
-              <FormattedRelative value={comment.posted}/>
+              <FormattedRelative value={comment.posted} />
             </a>
           </span>
         </div>
@@ -367,8 +367,8 @@ class UpdatesTab extends Component {
     axios
       .get(
         "http://127.0.0.1:8080/v0/projects/" +
-          this.props.projectId +
-          "/updates",
+        this.props.projectId +
+        "/updates",
         {
           crossdomain: true
         }
@@ -506,7 +506,7 @@ class Update extends Component {
               <FormattedDate value={update.posted} month='long' day='numeric' hour='2-digit' minute='2-digit' />
             </small>
             <small className="text-muted ml-auto">
-              <FormattedRelative value={update.posted}/>
+              <FormattedRelative value={update.posted} />
             </small>
           </p>
         </div>

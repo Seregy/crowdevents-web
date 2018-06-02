@@ -49,11 +49,11 @@ class Navigation extends Component {
           </ul>
           <ul className="navbar-nav">
             <button className="nav-item ml-auto btn btn-link nav-link">
-            <FormattedMessage
-              id="app.navigation.search"
-              defaultMessage="Search"
-            />
-            <FontAwesomeIcon className="search-icon" icon={faSearch} />
+              <FormattedMessage
+                id="app.navigation.search"
+                defaultMessage="Search"
+              />
+              <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </button>
             <NavItemLink path="/login">
               <FormattedMessage
@@ -72,15 +72,12 @@ function NavItemLink(props) {
   const pageURI = window.location.pathname + window.location.search;
   const liClassName = props.path === pageURI ? "nav-item active" : "nav-item";
   const aClassName = props.disabled ? "nav-link disabled" : "nav-link";
+  const currentTag = props.path === pageURI ? ( <span className="sr-only">(current)</span> ) : ("");
   return (
     <li className={liClassName}>
       <Link to={props.path} className={aClassName}>
         {props.children}
-        {props.path === pageURI ? (
-          <span className="sr-only">(current)</span>
-        ) : (
-          ""
-        )}
+        {currentTag}
       </Link>
     </li>
   );

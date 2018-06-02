@@ -74,10 +74,10 @@ class ProjectGallery extends Component {
         >
           <span className="carousel-control-next-icon" aria-hidden="true" />
           <span className="sr-only">
-          <FormattedMessage
-            id="app.project.gallery.next"
-            defaultMessage="Next"
-          />
+            <FormattedMessage
+              id="app.project.gallery.next"
+              defaultMessage="Next"
+            />
           </span>
         </a>
         <FollowIcon size="2" />

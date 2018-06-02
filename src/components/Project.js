@@ -340,7 +340,8 @@ class ProjectSideInfo extends Component {
               className="category mr-3"
               key={category.id}
             >
-              <FontAwesomeIcon className="category-icon" icon={faTag} />{" "}
+              <FontAwesomeIcon className="category-icon" icon={faTag} />
+              {" "}
               {category.name}
             </Link>
           ))}
