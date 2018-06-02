@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import humanizeDuration from "humanize-duration";
 import momentDurationFormatSetup from "moment-duration-format";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { FormattedMessage, FormattedDate, FormattedNumber, FormattedRelative } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import FollowIcon from "./FollowIcon";
 
@@ -12,15 +15,22 @@ import placeholderImage from "../image/placeholder.jpg";
 import "../css/ProjectList.css";
 
 class ProjectCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      project: props.project,
+      locale: props.locale
+    };
+  }
+
   render() {
     momentDurationFormatSetup(moment);
-    const project = this.props.project;
+    const project = this.state.project;
     const image = project.project_image || placeholderImage;
     const fundingGoal = project.funding_goal ? project.funding_goal.amount : 1;
     const progress = Math.floor(project.raised.amount / fundingGoal * 100);
-    const timeLeft = moment
-      .duration(moment(project.ends).diff(new moment()))
-      .format();
+    const timeLeft = humanizeDuration(moment.duration(moment(project.ends).diff(new moment())),
+      { language: this.state.locale, largest: 2, round: true });
 
     return (
       <div className="project-card card my-3">
@@ -46,17 +56,30 @@ class ProjectCard extends Component {
           <div className="d-flex">
             <div className="p-1">
               <span className="font-weight-bold">
-                {project.raised.amount +
-                  "" +
-                  getSymbolFromCurrency(project.raised.currency)}
+                <FormattedMessage
+                  id="app.project.raised.amountWithSymbol"
+                  defaultMessage="{currencySymbol}{amount}"
+                  values={{
+                    amount: project.raised.amount,
+                    currencySymbol: getSymbolFromCurrency(project.raised.currency)
+                  }}
+                />
               </span>
             </div>
             <div className="p-1 mr-auto">
               <small className="text-muted">
-                {project.raised.currency} зібрано
+                <FormattedMessage
+                  id="app.project.raised.text"
+                  defaultMessage="{currency} raised"
+                  values={{
+                    currency: project.raised.currency
+                  }}
+                />
               </small>
             </div>
-            <div className="p-1 ml-auto">{progress}%</div>
+            <div className="p-1 ml-auto">
+              <FormattedNumber value={progress / 100} style="percent"/>
+            </div>
           </div>
           <div className="progress mt-auto">
             <div
@@ -69,7 +92,12 @@ class ProjectCard extends Component {
             />
           </div>
           <small className="project-time-left p-1 text-muted">
-            {timeLeft} залишилось
+            {timeLeft}
+            {" "}
+            <FormattedMessage
+              id="app.project.timeLeft"
+              defaultMessage="left"
+            />
           </small>
         </div>
       </div>
@@ -81,6 +109,7 @@ class ProjectList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      locale: props.intl.locale,
       error: null,
       isLoaded: false,
       projects: []
@@ -109,9 +138,25 @@ class ProjectList extends Component {
   render() {
     const { error, isLoaded, projects } = this.state;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.error"
+            defaultMessage="Error: {errorMessage}"
+            values={{
+              errorMessage: error.message
+            }}
+          />
+        </div>
+      );
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.inProgress"
+            defaultMessage="Loading..."
+          />
+        </div>);
     } else {
       const rows = chunkArrayInGroups(projects, 3);
 
@@ -119,7 +164,7 @@ class ProjectList extends Component {
         <div className="row">
           <div className="card-deck col-12">
             {row.map(project => (
-              <ProjectCard project={project} key={project.id} />
+              <ProjectCard project={project} key={project.id} locale={this.state.locale} />
             ))}
           </div>
         </div>
@@ -136,4 +181,4 @@ function chunkArrayInGroups(arr, size) {
   return myArray;
 }
 
-export default ProjectList;
+export default injectIntl(ProjectList);
