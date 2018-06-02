@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import { FormattedMessage, FormattedDate, FormattedRelative } from 'react-intl';
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
@@ -49,17 +50,36 @@ function ProjectNavigation(props) {
 
   return (
     <ul className="nav nav-tabs">
-      <ProjectNavItem link={descriptionLink} title="Опис" active={props.active === "description"} enabled={true}/>
-      <ProjectNavItem link={faqLink} title="ЧаПи" active={props.active === "faq"} enabled={faqEnabled}/>
-      <ProjectNavItem link={updatesLink} title="Оновлення" active={props.active === "updates"} enabled={updatesEnabled}/>
-      <ProjectNavItem link={commentsLink} title="Коментарі" active={props.active === "comments"} enabled={commentsEnabled}/>
+      <ProjectNavItem link={descriptionLink} active={props.active === "description"} enabled={true}>
+        <FormattedMessage
+          id="app.project.tabs.description"
+          defaultMessage="Description"
+        />
+      </ProjectNavItem>
+      <ProjectNavItem link={faqLink} active={props.active === "faq"} enabled={faqEnabled}>
+        <FormattedMessage
+          id="app.project.tabs.faq"
+          defaultMessage="FAQ"
+        />
+      </ProjectNavItem>
+      <ProjectNavItem link={updatesLink} active={props.active === "updates"} enabled={updatesEnabled}>
+        <FormattedMessage
+          id="app.project.tabs.updates"
+          defaultMessage="Updates"
+        />
+      </ProjectNavItem>
+      <ProjectNavItem link={commentsLink} active={props.active === "comments"} enabled={commentsEnabled}>
+        <FormattedMessage
+          id="app.project.tabs.comments"
+          defaultMessage="Comments"
+        />
+      </ProjectNavItem>
     </ul>
   );
 }
 
 function ProjectNavItem(props) {
   let link = props.link;
-  const title = props.title;
   const active = props.active;
   const enabled = props.enabled;
 
@@ -82,7 +102,7 @@ function ProjectNavItem(props) {
           className={linkClass}
           to={link}
         >
-          {title}
+          {props.children}
         </Link>
       </li>
     );
@@ -92,7 +112,7 @@ function ProjectNavItem(props) {
         <a
           className={linkClass + " " + disableClass}
         >
-          {title}
+          {props.children}
         </a>
       </li>
     );
@@ -155,9 +175,25 @@ class CommentsTab extends Component {
     const { comments, error, isLoaded } = this.state;
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.error"
+            defaultMessage="Error: {errorMessage}"
+            values={{
+              errorMessage: error.message
+            }}
+          />
+        </div>
+      );
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.inProgress"
+            defaultMessage="Loading..."
+          />
+        </div>);
     } else {
       return (
         <div>
@@ -172,7 +208,6 @@ class CommentsTab extends Component {
 
 function Comment(props) {
   const comment = props.comment;
-  const time = moment(comment.posted).fromNow();
   const image = comment.author.image_link || avatarPlaceholder;
 
   return (
@@ -190,7 +225,7 @@ function Comment(props) {
           </Link>
           <span className="text-muted pl-2">
             <a className="comment-link" href={"#" + comment.id}>
-              {time}
+              <FormattedRelative value={comment.posted}/>
             </a>
           </span>
         </div>
@@ -239,9 +274,25 @@ class FaqsTab extends Component {
     const { faqs, error, isLoaded } = this.state;
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.error"
+            defaultMessage="Error: {errorMessage}"
+            values={{
+              errorMessage: error.message
+            }}
+          />
+        </div>
+      );
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.inProgress"
+            defaultMessage="Loading..."
+          />
+        </div>);
     } else {
       return (
         <div className="faqs" id="faqs">
@@ -343,9 +394,25 @@ class UpdatesTab extends Component {
     console.log(updates);
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.error"
+            defaultMessage="Error: {errorMessage}"
+            values={{
+              errorMessage: error.message
+            }}
+          />
+        </div>
+      );
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.inProgress"
+            defaultMessage="Loading..."
+          />
+        </div>);
     } else {
       return (
         <div className="updates">
@@ -398,12 +465,24 @@ class Update extends Component {
 
   render() {
     const { readMoreExpanded, isLoaded: isMessageLoaded, error } = this.state;
-
     const update = this.props.update;
-    const formattedTime = moment(update.posted).format("MMMM Do, hh:mm");
-    const fromNow = moment(update.posted).fromNow();
 
-    const readMoreLessText = readMoreExpanded ? "Read less" : "Read more";
+    let readMoreLessText = readMoreExpanded ? "Read less" : "Read more";
+    if (readMoreExpanded) {
+      readMoreLessText = (
+        <FormattedMessage
+          id="app.project.tabs.updates.readLess"
+          defaultMessage="Read less"
+        />
+      );
+    } else {
+      readMoreLessText = (
+        <FormattedMessage
+          id="app.project.tabs.updates.readMore"
+          defaultMessage="Read more"
+        />
+      );
+    }
 
     return (
       <div className="update card mb-3">
@@ -423,8 +502,12 @@ class Update extends Component {
             {readMoreLessText}
           </a>
           <p className="card-text d-flex">
-            <small className="text-muted">{formattedTime}</small>
-            <small className="text-muted ml-auto">{fromNow}</small>
+            <small className="text-muted">
+              <FormattedDate value={update.posted} month='long' day='numeric' hour='2-digit' minute='2-digit' />
+            </small>
+            <small className="text-muted ml-auto">
+              <FormattedRelative value={update.posted}/>
+            </small>
           </p>
         </div>
       </div>

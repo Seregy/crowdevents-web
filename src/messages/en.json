@@ -13,5 +13,11 @@
   "app.project.raised.percentage": "{percent}% of {currencySymbol}{amount}",
   "app.project.contributors": "{amount, plural, one {contributor} many {contributors}}",
   "app.project.timeLeft": "left",
-  "app.project.contribute": "Contribute"
+  "app.project.contribute": "Contribute",
+  "app.project.tabs.description": "Description",
+  "app.project.tabs.faq": "FAQ",
+  "app.project.tabs.updates": "Updates",
+  "app.project.tabs.comments": "Comments",
+  "app.project.tabs.updates.readMore": "Read more",
+  "app.project.tabs.updates.readLess": "Read less"
 }

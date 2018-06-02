@@ -13,5 +13,11 @@
   "app.project.raised.percentage": "{percent}% від {amount}{currencySymbol}",
   "app.project.contributors": "{amount, plural, one {вкладник} many {вкладників}}",
   "app.project.timeLeft": "залишилось",
-  "app.project.contribute": "Зробити внесок"
+  "app.project.contribute": "Зробити внесок",
+  "app.project.tabs.description": "Опис",
+  "app.project.tabs.faq": "ЧаПи",
+  "app.project.tabs.updates": "Оновлення",
+  "app.project.tabs.comments": "Коментарі",
+  "app.project.tabs.updates.readMore": "Розгорнути",
+  "app.project.tabs.updates.readLess": "Згорнути"
 }
