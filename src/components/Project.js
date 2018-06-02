@@ -4,7 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import humanizeDuration from "humanize-duration";
 import getSymbolFromCurrency from "currency-symbol-map";
-import Geocode from "react-geocode";
+import loadGoogleMapsApi from "load-google-maps-api";
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { injectIntl } from 'react-intl';
 
@@ -35,62 +35,76 @@ class Project extends Component {
       isProjectLoaded: false,
       isLocationLoaded: false,
       project: {},
+      geocoder: null
     };
   }
 
   componentDidMount() {
     moment.locale(this.state.locale);
 
-    axios
-      .get("http://127.0.0.1:8080/v0/projects/" + this.props.match.params.id, {
-        crossdomain: true
-      })
-      .then(
-        result => {
-          this.setState({
-            isProjectLoaded: true,
-            project: result.data
-          });
-        },
-        error => {
-          this.setState({
-            isProjectLoaded: true,
-            error
-          });
-        }
-      )
-      .then(() =>
-        Geocode.fromLatLng(
-          this.state.project.location.latitude,
-          this.state.project.location.longitude
-        )
-      )
-      .then(
-        response => {
-          console.log(response);
-          const postalCode = response.results[0].address_components.filter(
-            component => component.types.includes("postal_code")
-          );
-          let addressWithoutPostalCode = response.results[0].formatted_address;
-          if (postalCode.length > 0) {
-            addressWithoutPostalCode = addressWithoutPostalCode.replace(
-              " " + postalCode[0].long_name,
-              ""
-            );
-          }
+    const loadGoogleApi = loadGoogleMapsApi({
+      key: process.env.REACT_APP_GOOGLE_API_KEY,
+      language: this.state.locale
+    })
 
-          const location = this.state.project.location;
-          location.formatted_address = addressWithoutPostalCode;
+    loadGoogleApi.then(googleMaps => {
+      const geocoder = promisifyGeocoder(new googleMaps.Geocoder());
+      this.setState({
+        geocoder: geocoder
+      });
 
-          this.setState({
-            isLocationLoaded: true,
-            projectLocation: location
-          });
-        },
-        error => {
-          isLocationLoaded: true, error;
+    });
+
+    const loadProject = axios.get("http://127.0.0.1:8080/v0/projects/" + this.props.match.params.id, {
+      crossdomain: true
+    });
+
+    loadProject.then(
+      result => {
+        this.setState({
+          isProjectLoaded: true,
+          project: result.data
+        });
+      },
+      error => {
+        this.setState({
+          isProjectLoaded: true,
+          error
+        });
+      }
+    );
+
+    Promise.all([loadGoogleApi, loadProject]).then(() => {
+      const request = {
+        location: {
+          lat: this.state.project.location.latitude,
+          lng: this.state.project.location.longitude
         }
+      }
+      return this.state.geocoder.geocode(request);
+    }).then(results => {
+      const postalCode = results[0].address_components.filter(
+        component => component.types.includes("postal_code")
       );
+      let addressWithoutPostalCode = results[0].formatted_address;
+      if (postalCode.length > 0) {
+        addressWithoutPostalCode = addressWithoutPostalCode.replace(
+          " " + postalCode[0].long_name,
+          ""
+        );
+        addressWithoutPostalCode = addressWithoutPostalCode.replace(/,+$/, "")
+      }
+
+      const location = this.state.project.location;
+      location.formatted_address = addressWithoutPostalCode;
+
+      this.setState({
+        isLocationLoaded: true,
+        projectLocation: location
+      });
+    }).catch(error => {
+      isLocationLoaded: true, error;
+    })
   }
 
   render() {
@@ -156,6 +170,22 @@ class Project extends Component {
       );
     }
   }
+}
+
+function promisifyGeocoder(geocoder) {
+  const oldGeocode = geocoder.geocode;
+  geocoder.geocode = request => {
+    return new Promise((resolve, reject) => {
+      oldGeocode(request, (results, status) => {
+        if (status === "OK") {
+          resolve(results);
+        } else {
+          reject(status);
+        }
+      })
+    });
+  }
+  return geocoder;
 }
 
 function ProjectHeader(props) {
