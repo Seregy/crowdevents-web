@@ -19,5 +19,7 @@
   "app.project.tabs.updates": "Оновлення",
   "app.project.tabs.comments": "Коментарі",
   "app.project.tabs.updates.readMore": "Розгорнути",
-  "app.project.tabs.updates.readLess": "Згорнути"
+  "app.project.tabs.updates.readLess": "Згорнути",
+  "app.project.gallery.previous": "Попередній",
+  "app.project.gallery.next": "Наступний"
 }

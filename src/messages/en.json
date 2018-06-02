@@ -19,5 +19,7 @@
   "app.project.tabs.updates": "Updates",
   "app.project.tabs.comments": "Comments",
   "app.project.tabs.updates.readMore": "Read more",
-  "app.project.tabs.updates.readLess": "Read less"
+  "app.project.tabs.updates.readLess": "Read less",
+  "app.project.gallery.previous": "Previous",
+  "app.project.gallery.next": "Next"
 }

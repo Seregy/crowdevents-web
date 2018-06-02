@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from 'react-intl';
 
 import FollowIcon from "./FollowIcon";
 
@@ -58,7 +59,12 @@ class ProjectGallery extends Component {
           data-slide="prev"
         >
           <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="sr-only">Previous</span>
+          <span className="sr-only">
+            <FormattedMessage
+              id="app.project.gallery.previous"
+              defaultMessage="Previous"
+            />
+          </span>
         </a>
         <a
           className="carousel-control-next"
@@ -67,7 +73,12 @@ class ProjectGallery extends Component {
           data-slide="next"
         >
           <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="sr-only">Next</span>
+          <span className="sr-only">
+          <FormattedMessage
+            id="app.project.gallery.next"
+            defaultMessage="Next"
+          />
+          </span>
         </a>
         <FollowIcon size="2" />
       </div>
