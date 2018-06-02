@@ -11,7 +11,7 @@
   "app.project.raised.amountWithSymbol": "{currencySymbol}{amount}",
   "app.project.raised.text": "{currency} raised",
   "app.project.raised.percentage": "{percent}% of {currencySymbol}{amount}",
-  "app.project.contributors": "{amount, plural, one {contributor} many {contributors}}",
+  "app.project.contributors": "{amount, plural, one {contributor} many {contributors} other {contributors}}",
   "app.project.timeLeft": "left",
   "app.project.contribute": "Contribute",
   "app.project.tabs.description": "Description",
