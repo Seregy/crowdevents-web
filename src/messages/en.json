@@ -21,5 +21,11 @@
   "app.project.tabs.updates.readMore": "Read more",
   "app.project.tabs.updates.readLess": "Read less",
   "app.project.gallery.previous": "Previous",
-  "app.project.gallery.next": "Next"
+  "app.project.gallery.next": "Next",
+  "app.project.reward.minimalContribution.text": "Contribute {amountWithCurrency} or more",
+  "app.project.reward.minimalContribution.amountWithSymbol": "{currencySymbol}{amount}",
+  "app.project.reward.amount.left": "{amount} left",
+  "app.project.reward.amount.unlimited": "Unlimited amount",
+  "app.project.reward.delivery.location": "Delivery: {location}",
+  "app.project.reward.delivery.date": "Delivery date: {date}"
 }

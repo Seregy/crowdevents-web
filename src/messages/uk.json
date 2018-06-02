@@ -21,5 +21,11 @@
   "app.project.tabs.updates.readMore": "Розгорнути",
   "app.project.tabs.updates.readLess": "Згорнути",
   "app.project.gallery.previous": "Попередній",
-  "app.project.gallery.next": "Наступний"
+  "app.project.gallery.next": "Наступний",
+  "app.project.reward.minimalContribution.text": "Внесіть {amountWithCurrency} або більше",
+  "app.project.reward.minimalContribution.amountWithSymbol": "{amount}{currencySymbol}",
+  "app.project.reward.amount.left": "Залишилось {amount}",
+  "app.project.reward.amount.unlimited": "Необмежена кількість",
+  "app.project.reward.delivery.location": "Доставка: {location}",
+  "app.project.reward.delivery.date": "Дата доставки: {date}"
 }
