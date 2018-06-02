@@ -234,7 +234,7 @@ class ProjectSideInfo extends Component {
     const progress = Math.floor(raised.amount / fundingGoal.amount * 100);
 
     const timeLeft = humanizeDuration(moment.duration(moment(project.ends).diff(new moment())),
-      { language: this.state.locale, largest: 1, round: true });
+      { language: this.state.locale, largest: 2, round: true });
 
     const owner = project.owner;
     const ownerImage = owner.image_link || avatarPlaceholder;
