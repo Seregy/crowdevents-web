@@ -3,5 +3,15 @@
   "app.navigation.explore": "Більше проектів",
   "app.navigation.create": "Створити проект",
   "app.navigation.search": "Пошук",
-  "app.navigation.login": "Увійти"
+  "app.navigation.login": "Увійти",
+  "app.load.error": "Помилка завантаження даних: {errorMessage}",
+  "app.load.inProgress": "Триває завантаження...",
+  "app.project.owner": "Власник проекту",
+  "app.project.raised": "{amount} зібрано",
+  "app.project.raised.amountWithSymbol": "{amount}{currencySymbol}",
+  "app.project.raised.text": "{currency} зібрано",
+  "app.project.raised.percentage": "{percent}% від {amount}{currencySymbol}",
+  "app.project.contributors": "{amount, plural, one {вкладник} many {вкладників}}",
+  "app.project.timeLeft": "залишилось",
+  "app.project.contribute": "Зробити внесок"
 }

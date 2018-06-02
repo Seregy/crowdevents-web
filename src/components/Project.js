@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import humanizeDuration from "humanize-duration";
 import getSymbolFromCurrency from "currency-symbol-map";
 import Geocode from "react-geocode";
+import { FormattedMessage, FormattedDate } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import ProjectDetails from "./ProjectDetails";
 import ProjectGallery from "./ProjectGallery";
 import ProjectRewards from "./ProjectRewards";
+
+import "moment/locale/uk";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
@@ -25,6 +30,7 @@ class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      locale: props.intl.locale,
       error: null,
       isProjectLoaded: false,
       isLocationLoaded: false,
@@ -33,6 +39,8 @@ class Project extends Component {
   }
 
   componentDidMount() {
+    moment.locale(this.state.locale);
+
     axios
       .get("http://127.0.0.1:8080/v0/projects/" + this.props.match.params.id, {
         crossdomain: true
@@ -98,9 +106,25 @@ class Project extends Component {
     const eventDate = moment(project.event_date);
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.error"
+            defaultMessage="Error: {errorMessage}"
+            values={{
+              errorMessage: error.message
+            }}
+          />
+        </div>
+      );
     } else if (!isProjectLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <FormattedMessage
+            id="app.load.inProgress"
+            defaultMessage="Loading..."
+          />
+        </div>);
     } else {
       return (
         <div className="project">
@@ -114,7 +138,7 @@ class Project extends Component {
               />
             </div>
             <div className="col-4">
-              <ProjectSideInfo project={project} />
+              <ProjectSideInfo project={project} locale={this.state.locale} />
             </div>
           </div>
           <div className="project-details row">
@@ -159,14 +183,14 @@ function ProjectFooter(props) {
 }
 
 function ProjectDate(props) {
-  const formattedDate = props.date.format("dddd, MMMM Do, hh:mm");
-  const isoDate = props.date.toISOString();
+  const date = props.date;
+  const isoDate = date.toISOString();
 
   return (
     <div className="mr-auto">
       <Link to={"/date/" + isoDate} className="event-date">
         <FontAwesomeIcon className="date-icon" icon={faCalendarAlt} />{" "}
-        {formattedDate}
+        <FormattedDate value={date} weekday='long' year='numeric' month='long' day='numeric' hour='2-digit' minute='2-digit' />
       </Link>
     </div>
   );
@@ -187,87 +211,143 @@ function ProjectAddress(props) {
   );
 }
 
-function ProjectSideInfo(props) {
-  const project = props.project;
+class ProjectSideInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      project: props.project,
+      locale: props.locale
+    };
+  }
 
-  const raised = project.raised || { amount: 0 };
+  componentDidMount() {
+    moment.locale(this.state.locale);
+  }
 
-  const categories = project.categories || [];
+  render() {
+    const project = this.state.project;
+    const raised = project.raised || { amount: 0 };
 
-  const fundingGoal = project.funding_goal || { amount: 1 };
-  const progress = Math.floor(raised.amount / fundingGoal.amount * 100);
-  const timeLeft = moment
-    .duration(moment(project.ends).diff(new moment()))
-    .format();
+    const categories = project.categories || [];
 
-  const owner = project.owner;
-  const ownerImage = owner.image_link || avatarPlaceholder;
+    const fundingGoal = project.funding_goal || { amount: 1 };
+    const progress = Math.floor(raised.amount / fundingGoal.amount * 100);
 
-  return (
-    <div className="project-info px-2 d-flex flex-column flex-fill text-left">
-      <div className="project-owner info-block d-flex">
-      <Link className="image-link" to={"person/" + owner.id}>
+    const timeLeft = humanizeDuration(moment.duration(moment(project.ends).diff(new moment())),
+      { language: this.state.locale, largest: 1, round: true });
+
+    const owner = project.owner;
+    const ownerImage = owner.image_link || avatarPlaceholder;
+
+    return (
+      <div className="project-info px-2 d-flex flex-column flex-fill text-left">
+        <div className="project-owner info-block d-flex">
+          <Link className="image-link" to={"person/" + owner.id}>
             <img className="image" src={ownerImage} />
           </Link>
           <div className="d-flex flex-column pl-3">
             <Link className="owner-link" to={"person/" + owner.id}>
               {owner.name} {owner.surname ? owner.surname : ""}
             </Link>
-            <div className="text-muted">Власник проекту</div>
+            <div className="text-muted">
+              <FormattedMessage
+                id="app.project.owner"
+                defaultMessage="Project owner"
+              />
+            </div>
           </div>
-      </div>
-      <div className="info-block progress">
-        <div
-          className="progress-bar"
-          style={{ width: progress + "%" }}
-          role="progressbar"
-          aria-valuenow={raised.amount}
-          aria-valuemin="0"
-          aria-valuemax={fundingGoal.amount}
-        />
-      </div>
-      <div className="info-block">
-        <span className="primary text-primary">
-          {raised.amount + "" + getSymbolFromCurrency(raised.currency)}{" "}
-        </span>
-        <span className="">{raised.currency} зібрано</span>
-        <div className="text-muted">
-          {progress}% від{" "}
-          {fundingGoal.amount +
-            "" +
-            getSymbolFromCurrency(fundingGoal.currency)}
+        </div>
+        <div className="info-block progress">
+          <div
+            className="progress-bar"
+            style={{ width: progress + "%" }}
+            role="progressbar"
+            aria-valuenow={raised.amount}
+            aria-valuemin="0"
+            aria-valuemax={fundingGoal.amount}
+          />
+        </div>
+        <div className="info-block">
+          <span className="primary text-primary">
+            <FormattedMessage
+              id="app.project.raised.amountWithSymbol"
+              defaultMessage="{currencySymbol}{amount}"
+              values={{
+                amount: raised.amount,
+                currencySymbol: getSymbolFromCurrency(raised.currency)
+              }}
+            />
+          </span>
+          {" "}
+          <FormattedMessage
+            id="app.project.raised.text"
+            defaultMessage="{currency} raised"
+            values={{
+              currency: raised.currency
+            }}
+          />
+          <div className="text-muted">
+            <FormattedMessage
+              id="app.project.raised.percentage"
+              defaultMessage="{percent}% of {currencySymbol}{amount}"
+              values={{
+                percent: progress,
+                amount: fundingGoal.amount,
+                currencySymbol: getSymbolFromCurrency(fundingGoal.currency)
+              }}
+            />
+          </div>
+        </div>
+        <div className="info-block">
+          <span className="primary">{project.contributions.length}</span>
+          <div className="text-muted">
+            <FormattedMessage
+              id="app.project.contributors"
+              defaultMessage={`{amount, plural,
+                one {contributor}
+                many {contributors}
+              }`}
+              values={{
+                amount: project.contributions.length
+              }}
+            />
+          </div>
+        </div>
+        <div className="info-block">
+          <span className="primary">{timeLeft}</span>
+          <div className="text-muted">
+            <FormattedMessage
+              id="app.project.timeLeft"
+              defaultMessage="left"
+            />
+          </div>
+        </div>
+        <div className="info-block contribute">
+          <Link
+            to={"/contribute/" + project.id}
+            className="btn btn-primary w-100"
+          >
+            <FormattedMessage
+              id="app.project.contribute"
+              defaultMessage="Contribute"
+            />
+          </Link>
+        </div>
+        <div className="info-block d-flex">
+          {categories.map(category => (
+            <Link
+              to={"/category/" + category.id}
+              className="category mr-3"
+              key={category.id}
+            >
+              <FontAwesomeIcon className="category-icon" icon={faTag} />{" "}
+              {category.name}
+            </Link>
+          ))}
         </div>
       </div>
-      <div className="info-block">
-        <span className="primary">{project.contributions.length}</span>
-        <div className="text-muted">вкладник</div>
-      </div>
-      <div className="info-block">
-        <span className="primary">{timeLeft}</span>
-        <div className="text-muted">залишилось</div>
-      </div>
-      <div className="info-block contribute">
-        <Link
-          to={"/contribute/" + project.id}
-          className="btn btn-primary w-100"
-        >
-          Зробити внесок
-        </Link>
-      </div>
-      <div className="info-block d-flex">
-        {categories.map(category => (
-          <Link
-            to={"/category/" + category.id}
-            className="category mr-3"
-            key={category.id}
-          >
-            <FontAwesomeIcon className="category-icon" icon={faTag} />{" "}
-            {category.name}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default Project;
+export default injectIntl(Project);

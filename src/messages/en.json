@@ -3,5 +3,15 @@
   "app.navigation.explore": "Explore",
   "app.navigation.create": "Create project",
   "app.navigation.search": "Search",
-  "app.navigation.login": "Login"
+  "app.navigation.login": "Login",
+  "app.load.error": "Error fetching data: {errorMessage}",
+  "app.load.inProgress": "Loading...",
+  "app.project.owner": "Project owner",
+  "app.project.raised": "{amount} raised",
+  "app.project.raised.amountWithSymbol": "{currencySymbol}{amount}",
+  "app.project.raised.text": "{currency} raised",
+  "app.project.raised.percentage": "{percent}% of {currencySymbol}{amount}",
+  "app.project.contributors": "{amount, plural, one {contributor} many {contributors}}",
+  "app.project.timeLeft": "left",
+  "app.project.contribute": "Contribute"
 }
