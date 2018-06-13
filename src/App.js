@@ -10,6 +10,10 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 class App extends Component {
+  componentWillMount() {
+    const { cookies } = this.props
+  }
+
   render() {
     return (
       <div className="app container">
