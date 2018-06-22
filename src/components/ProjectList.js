@@ -156,8 +156,8 @@ class ProjectList extends Component {
     } else {
       const rows = chunkArrayInGroups(projects, 3);
 
-      return rows.map(row => (
-        <div className="row">
+      return rows.map((row, index) => (
+        <div className="row" key={index}>
           <div className="card-deck col-12">
             {row.map(project => (
               <ProjectCard project={project} key={project.id} locale={this.state.locale} />
