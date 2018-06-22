@@ -6,8 +6,7 @@ class Explore extends Component {
   render() {
     return (
       <div className="explore">
-        <Navigation />
-        <Footer />
+        {"Search page placeholder"}
       </div>
     );
   }
