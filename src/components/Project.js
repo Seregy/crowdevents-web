@@ -15,9 +15,6 @@ import ProjectRewards from "./ProjectRewards";
 import "moment/locale/uk";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
-import faLink from "@fortawesome/fontawesome-free-solid/faLink";
-import faEnvelope from "@fortawesome/fontawesome-free-solid/faEnvelope";
 import faTag from "@fortawesome/fontawesome-free-solid/faTag";
 import faMapMarkerAlt from "@fortawesome/fontawesome-free-solid/faMapMarkerAlt";
 import faCalendarAlt from "@fortawesome/fontawesome-free-regular/faCalendarAlt";

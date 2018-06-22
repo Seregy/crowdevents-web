@@ -8,7 +8,7 @@ import UserProfile from "./UserProfile";
 import Login from "./Login";
 import Logout from "./Logout";
 
-import { getOauthToken, isOauthTokenExpired } from "../utils/Oauth";
+import { isOauthTokenExpired } from "../utils/Oauth";
 
 class Main extends Component {
   constructor(props) {

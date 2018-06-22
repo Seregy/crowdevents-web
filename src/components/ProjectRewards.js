@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import getSymbolFromCurrency from "currency-symbol-map";
-import { FormattedMessage, FormattedDate, FormattedNumber } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import "../css/ProjectRewards.css";
 

@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
 import { FormattedMessage, FormattedDate, FormattedRelative } from 'react-intl';
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
-import faLink from "@fortawesome/fontawesome-free-solid/faLink";
-import faEnvelope from "@fortawesome/fontawesome-free-solid/faEnvelope";
-import faTag from "@fortawesome/fontawesome-free-solid/faTag";
-import faMapMarkerAlt from "@fortawesome/fontawesome-free-solid/faMapMarkerAlt";
-import faCalendarAlt from "@fortawesome/fontawesome-free-regular/faCalendarAlt";
 import faCaretRight from "@fortawesome/fontawesome-free-solid/faCaretRight";
 import faCaretDown from "@fortawesome/fontawesome-free-solid/faCaretDown";
 

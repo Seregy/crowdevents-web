@@ -5,7 +5,7 @@ import moment from "moment";
 import humanizeDuration from "humanize-duration";
 import momentDurationFormatSetup from "moment-duration-format";
 import getSymbolFromCurrency from "currency-symbol-map";
-import { FormattedMessage, FormattedDate, FormattedNumber, FormattedRelative } from 'react-intl';
+import { FormattedMessage, FormattedNumber } from 'react-intl';
 import { injectIntl } from 'react-intl';
 
 import FollowIcon from "./FollowIcon";

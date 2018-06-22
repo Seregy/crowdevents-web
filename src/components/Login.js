@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { getNewAccessToken } from "../utils/Oauth";
 import { injectIntl, FormattedMessage } from 'react-intl';
-
-import ProjectList from "./ProjectList";
 
 import "../css/Login.css";
 
