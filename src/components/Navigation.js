@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import axios from "axios";
 
-import { getOauthToken, isOauthTokenExpired } from "../utils/Oauth";
+import { getCurrentUser } from "../utils/Oauth";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
@@ -13,27 +13,6 @@ import "../css/Navigation.css";
 class Navigation extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentUser: {}
-    }
-  }
-
-  componentDidMount() {
-    const token = getOauthToken();
-
-    if (token) {
-      axios.get("http://127.0.0.1:8080/v0/persons/current", {
-        headers: {
-          "Authorization": "Bearer " + token.access_token
-        }
-      }).then(
-        response => {
-          this.setState({
-            currentUser: response.data,
-          })
-        }
-      )
-    }
   }
 
   render() {
@@ -83,7 +62,7 @@ class Navigation extends Component {
               />
               <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </button>
-            <ProfileLink currentUser={this.state.currentUser} />
+            <ProfileLink />
           </ul>
         </div>
       </nav>
@@ -92,9 +71,9 @@ class Navigation extends Component {
 }
 
 function ProfileLink(props) {
-  const user = props.currentUser;
+  const user = getCurrentUser();
 
-  if (isOauthTokenExpired()) {
+  if (!user) {
     return (
       <NavItemLink path="/login">
         <FormattedMessage
@@ -133,7 +112,6 @@ function ProfileLink(props) {
       </div>
     );
   }
-
 }
 
 function NavItemLink(props) {

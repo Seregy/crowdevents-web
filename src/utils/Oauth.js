@@ -4,8 +4,13 @@ export function getOauthToken() {
   return JSON.parse(localStorage.getItem("oauth_token"));
 }
 
+export function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("current_user"));
+}
+
 export function removeOauthToken() {
   localStorage.removeItem("oauth_token");
+  localStorage.removeItem("current_user");
 }
 
 export function isOauthTokenExpired() {
@@ -74,6 +79,18 @@ export function getNewAccessToken(username, password) {
           reject(response);
         }
       }
-    );
+    ).then(() => {
+      const accessToken = getOauthToken().access_token;
+
+      axios.get("http://127.0.0.1:8080/v0/persons/current", {
+        headers: {
+          "Authorization": "Bearer " + accessToken
+        }
+      }).then(
+        response => {
+          localStorage.setItem("current_user", JSON.stringify(response.data));
+        }
+      )
+    });
   });
 }
