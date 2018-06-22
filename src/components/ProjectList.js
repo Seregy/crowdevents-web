@@ -38,10 +38,6 @@ class ProjectCard extends Component {
           <Link className="card-title-link" to={"/project/" + project.id}>
             <img className="project-img card-img-top" src={image} alt="" />
           </Link>
-          {/* <span className="project-follow-icon fa-layers fa-fw">
-          <FontAwesomeIcon className="circle-icon" icon={faCircle} transform="inverse grow-12" />
-          <Link to="/"><FontAwesomeIcon className="heart-icon" icon={faHeart}/></Link>
-        </span> */}
           <FollowIcon />
         </div>
         <div className="card-body">
