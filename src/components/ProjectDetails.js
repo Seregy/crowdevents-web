@@ -391,7 +391,6 @@ class UpdatesTab extends Component {
 
   render() {
     const { updates, error, isLoaded } = this.state;
-    console.log(updates);
 
     if (error) {
       return (
