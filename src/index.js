@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { CookiesProvider } from 'react-cookie';
 import "./css/index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
@@ -24,9 +23,7 @@ addLocaleData([...en, ...uk]);
 ReactDOM.render(
   <IntlProvider locale={locale} messages={messages[locale]}>
     <BrowserRouter>
-      <CookiesProvider>
         <App />
-      </CookiesProvider>
     </BrowserRouter>
   </IntlProvider>,
   document.getElementById("root")

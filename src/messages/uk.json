@@ -27,5 +27,12 @@
   "app.project.reward.amount.left": "Залишилось {amount}",
   "app.project.reward.amount.unlimited": "Необмежена кількість",
   "app.project.reward.delivery.location": "Доставка: {location}",
-  "app.project.reward.delivery.date": "Дата доставки: {date}"
+  "app.project.reward.delivery.date": "Дата доставки: {date}",
+  "app.signup.newToSite": "Вперше на MeetIn?",
+  "app.signup.signupWithExclamation": "Зареєструйтесь!",
+  "app.signin.placeholder.email": "Електронна пошта",
+  "app.signin.placeholder.password": "Пароль",
+  "app.signin.restorePassword": "Забули пароль?",
+  "app.signin.remember": "Запам'ятати мене",
+  "app.signin.signin": "Увійти"
 }

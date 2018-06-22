@@ -27,5 +27,12 @@
   "app.project.reward.amount.left": "{amount} left",
   "app.project.reward.amount.unlimited": "Unlimited amount",
   "app.project.reward.delivery.location": "Delivery: {location}",
-  "app.project.reward.delivery.date": "Delivery date: {date}"
+  "app.project.reward.delivery.date": "Delivery date: {date}",
+  "app.signup.newToSite": "New to MeetIn?",
+  "app.signup.signupWithExclamation": "Sign up!",
+  "app.signin.placeholder.email": "Email",
+  "app.signin.placeholder.password": "Password",
+  "app.signin.restorePassword": "Forgot your password?",
+  "app.signin.remember": "Remember me",
+  "app.signin.signin": "Login"
 }

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
+import axios from "axios";
+
+import { getOauthToken, isOauthTokenExpired } from "../utils/Oauth";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
@@ -8,6 +11,31 @@ import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
 import "../css/Navigation.css";
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: {}
+    }
+  }
+
+  componentDidMount() {
+    const token = getOauthToken();
+
+    if (token) {
+      axios.get("http://127.0.0.1:8080/v0/persons/current", {
+        headers: {
+          "Authorization": "Bearer " + token.access_token
+        }
+      }).then(
+        response => {
+          this.setState({
+            currentUser: response.data,
+          })
+        }
+      )
+    }
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -55,12 +83,7 @@ class Navigation extends Component {
               />
               <FontAwesomeIcon className="search-icon" icon={faSearch} />
             </button>
-            <NavItemLink path="/login">
-              <FormattedMessage
-                id="app.navigation.login"
-                defaultMessage="Login"
-              />
-            </NavItemLink>
+            <ProfileLink currentUser={this.state.currentUser} />
           </ul>
         </div>
       </nav>
@@ -68,11 +91,56 @@ class Navigation extends Component {
   }
 }
 
+function ProfileLink(props) {
+  const user = props.currentUser;
+
+  if (isOauthTokenExpired()) {
+    return (
+      <NavItemLink path="/login">
+        <FormattedMessage
+          id="app.navigation.login"
+          defaultMessage="Login"
+        />
+      </NavItemLink>
+    );
+  } else {
+    return (
+      <div className="profile nav-item dropdown">
+        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          {user.name}
+        </a>
+        <div className="dropdown-menu">
+          <Link to="/me" className="dropdown-item">
+            <FormattedMessage
+              id="app.navigation.profile"
+              defaultMessage="Profile"
+            />
+          </Link>
+          <Link to="/me" className="dropdown-item">
+            <FormattedMessage
+              id="app.navigation.settings"
+              defaultMessage="Settings"
+            />
+          </Link>
+          <div className="dropdown-divider"></div>
+          <Link to="/logout" className="dropdown-item">
+            <FormattedMessage
+              id="app.navigation.logout"
+              defaultMessage="Logout"
+            />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+}
+
 function NavItemLink(props) {
   const pageURI = window.location.pathname + window.location.search;
   const liClassName = props.path === pageURI ? "nav-item active" : "nav-item";
   const aClassName = props.disabled ? "nav-link disabled" : "nav-link";
-  const currentTag = props.path === pageURI ? ( <span className="sr-only">(current)</span> ) : ("");
+  const currentTag = props.path === pageURI ? (<span className="sr-only">(current)</span>) : ("");
   return (
     <li className={liClassName}>
       <Link to={props.path} className={aClassName}>
