@@ -17,7 +17,7 @@ class Login extends Component {
     return (
       <div className="login-block border">
         <LoginForm submitHandler={this.handleLogin} intl={this.intl} />
-        <hr/>
+        <hr />
         <div className="signup">
           <FormattedMessage
             id="app.signup.newToSite"
@@ -32,13 +32,13 @@ class Login extends Component {
           </Link>
         </div>
       </div>
-     );
+    );
   }
 
   handleLogin(event) {
     event.preventDefault();
     getNewAccessToken(event.target.email.value, event.target.password.value)
-    .then(() => this.props.history.push("/me"));
+      .then(() => this.props.history.push("/me"));
   }
 
 
