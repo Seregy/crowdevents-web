@@ -1,5 +1,8 @@
 import axios from "axios";
 
+const authUrl = process.env.REACT_APP_AUTH_SERVER_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export function getOauthToken() {
   return JSON.parse(localStorage.getItem("oauth_token"));
 }
@@ -39,7 +42,7 @@ export function isTokenValid(token) {
   };
 
   return new Promise((resolve, reject) => {
-    axios.post("http://127.0.0.1:8080/oauth/check_token", data, config).then(
+    axios.post("oauth/check_token", data, config).then(
       response => {
         if (response.status === 200) {
           resolve(response.data.active);
@@ -68,7 +71,7 @@ export function getNewAccessToken(username, password) {
   };
 
   return new Promise((resolve, reject) => {
-    axios.post("http://127.0.0.1:8080/oauth/token", data, config).then(
+    axios.post(authUrl + "oauth/token", data, config).then(
       response => {
         if (response.status === 200) {
           const data = response.data;
@@ -82,7 +85,7 @@ export function getNewAccessToken(username, password) {
     ).then(() => {
       const accessToken = getOauthToken().access_token;
 
-      axios.get("http://127.0.0.1:8080/v0/persons/current", {
+      axios.get(apiUrl + "persons/current", {
         headers: {
           "Authorization": "Bearer " + accessToken
         }

@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { getOauthToken, removeOauthToken } from "../utils/Oauth";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class UserProfile extends Component {
   componentDidMount() {
     const token = getOauthToken();
 
-    axios.get("http://127.0.0.1:8080/v0/persons/current", {
+    axios.get(apiUrl + "persons/current", {
       headers: {
         "Authorization": "Bearer " + token.access_token
       }

@@ -14,6 +14,8 @@ import placeholderImage from "../image/placeholder.jpg";
 
 import "../css/ProjectList.css";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 class ProjectCard extends Component {
   constructor(props) {
     super(props);
@@ -114,7 +116,7 @@ class ProjectList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://127.0.0.1:8080/v0/projects?limit=12", { crossdomain: true })
+      .get(apiUrl + "projects?limit=12", { crossdomain: true })
       .then(
         result => {
           this.setState({

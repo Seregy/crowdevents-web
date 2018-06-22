@@ -11,6 +11,8 @@ import "../css/ProjectDetails.css";
 
 import avatarPlaceholder from "../image/avatar_placeholder.png";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function ProjectDetails(props) {
   let currentTab = "description";
   if (props.currentTab === "faq") {
@@ -141,7 +143,7 @@ class CommentsTab extends Component {
   componentDidMount() {
     axios
       .get(
-        "http://127.0.0.1:8080/v0/projects/" +
+        apiUrl + "projects/" +
         this.props.projectId +
         "/comments",
         {
@@ -242,7 +244,7 @@ class FaqsTab extends Component {
   componentDidMount() {
     axios
       .get(
-        "http://127.0.0.1:8080/v0/projects/" + this.props.projectId + "/faqs",
+        apiUrl + "projects/" + this.props.projectId + "/faqs",
         {
           crossdomain: true
         }
@@ -359,7 +361,7 @@ class UpdatesTab extends Component {
   componentDidMount() {
     axios
       .get(
-        "http://127.0.0.1:8080/v0/projects/" +
+        apiUrl + "projects/" +
         this.props.projectId +
         "/updates",
         {
@@ -436,7 +438,7 @@ class Update extends Component {
 
   componentDidMount() {
     axios
-      .get("http://127.0.0.1:8080/v0/updates/" + this.props.update.id, {
+      .get(apiUrl + "updates/" + this.props.update.id, {
         crossdomain: true
       })
       .then(
