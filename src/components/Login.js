@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { getNewAccessToken } from "../utils/Oauth";
+import { getNewAccessToken } from "../utils/Auth";
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 import "../css/Login.css";

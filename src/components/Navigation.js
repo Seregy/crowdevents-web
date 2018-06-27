@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 
-import { getCurrentUser } from "../utils/Oauth";
+import { getCurrentUser } from "../utils/Auth";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";

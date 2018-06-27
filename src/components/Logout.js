@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { removeOauthToken } from "../utils/Oauth";
+import { removeOauthToken } from "../utils/Auth";
 
 class Logout extends Component {
   componentWillMount() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import { getOauthToken, removeOauthToken } from "../utils/Oauth";
+import { getOauthToken, removeOauthToken } from "../utils/Auth";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
