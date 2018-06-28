@@ -14,7 +14,7 @@ import placeholderImage from "../image/placeholder.jpg";
 
 import "../css/ProjectList.css";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL || "http://127.0.0.1:8080/v0/";
 
 class ProjectCard extends Component {
   constructor(props) {

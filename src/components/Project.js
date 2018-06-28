@@ -23,7 +23,7 @@ import "../css/Project.css";
 
 import avatarPlaceholder from "../image/avatar_placeholder.png";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL || "http://127.0.0.1:8080/v0/";
 
 class Project extends Component {
   constructor(props) {

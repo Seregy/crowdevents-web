@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const authUrl = process.env.REACT_APP_AUTH_SERVER_URL;
-const apiUrl = process.env.REACT_APP_API_URL;
+const authUrl = process.env.REACT_APP_AUTH_SERVER_URL || "http://127.0.0.1:8080/";
+const apiUrl = process.env.REACT_APP_API_URL || "http://127.0.0.1:8080/v0/";
 
 export function getOauthToken() {
   return JSON.parse(localStorage.getItem("oauth_token"));
