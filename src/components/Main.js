@@ -11,10 +11,6 @@ import Logout from "./Logout";
 import { isOauthTokenExpired } from "../utils/Auth";
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Switch>

@@ -209,7 +209,7 @@ function Comment(props) {
     <div id={comment.id} className="comment row p-3">
       <div className="col-2 text-center">
         <Link className="image-link" to={"/person/" + comment.author.id}>
-          <img className="image" src={image} />
+          <img className="image" src={image} alt="" />
         </Link>
       </div>
       <div className="col-10 d-flex flex-column">

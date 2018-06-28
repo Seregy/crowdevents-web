@@ -275,7 +275,7 @@ class ProjectSideInfo extends Component {
       <div className="project-info px-2 d-flex flex-column flex-fill text-left">
         <div className="project-owner info-block d-flex">
           <Link className="image-link" to={"person/" + owner.id}>
-            <img className="image" src={ownerImage} />
+            <img className="image" src={ownerImage} alt="" />
           </Link>
           <div className="d-flex flex-column pl-3">
             <Link className="owner-link" to={"person/" + owner.id}>

@@ -42,7 +42,7 @@ class App extends Component {
           <div className="app container">
             <Navigation />
             <Main />
-            <Footer key={locale} locale={locale} changeLocale={this.changeLocale}/>
+            <Footer key={locale} locale={locale} changeLocale={this.changeLocale} />
           </div>
         </BrowserRouter>
       </IntlProvider>

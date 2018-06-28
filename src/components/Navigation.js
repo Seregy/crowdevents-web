@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 
@@ -9,64 +9,58 @@ import faSearch from "@fortawesome/fontawesome-free-solid/faSearch";
 
 import "../css/Navigation.css";
 
-class Navigation extends Component {
-  constructor(props) {
-    super(props);
-  }
+function Navigation(props) {
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="/">
+        MeetIn
+      </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
 
-  render() {
-    return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">
-          MeetIn
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mr-auto">
-            <NavItemLink path="/">
-              <FormattedMessage
-                id="app.navigation.home"
-                defaultMessage="Home"
-              />
-            </NavItemLink>
-            <NavItemLink path="/explore">
-              <FormattedMessage
-                id="app.navigation.explore"
-                defaultMessage="Explore"
-              />
-            </NavItemLink>
-            <NavItemLink path="/create">
-              <FormattedMessage
-                id="app.navigation.create"
-                defaultMessage="Create"
-              />
-            </NavItemLink>
-          </ul>
-          <ul className="navbar-nav">
-            <button className="nav-item ml-auto btn btn-link nav-link">
-              <FormattedMessage
-                id="app.navigation.search"
-                defaultMessage="Search"
-              />
-              <FontAwesomeIcon className="search-icon" icon={faSearch} />
-            </button>
-            <ProfileLink />
-          </ul>
-        </div>
-      </nav>
-    );
-  }
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav mr-auto">
+          <NavItemLink path="/">
+            <FormattedMessage
+              id="app.navigation.home"
+              defaultMessage="Home"
+            />
+          </NavItemLink>
+          <NavItemLink path="/explore">
+            <FormattedMessage
+              id="app.navigation.explore"
+              defaultMessage="Explore"
+            />
+          </NavItemLink>
+          <NavItemLink path="/create">
+            <FormattedMessage
+              id="app.navigation.create"
+              defaultMessage="Create"
+            />
+          </NavItemLink>
+        </ul>
+        <ul className="navbar-nav">
+          <button className="nav-item ml-auto btn btn-link nav-link">
+            <FormattedMessage
+              id="app.navigation.search"
+              defaultMessage="Search"
+            />
+            <FontAwesomeIcon className="search-icon" icon={faSearch} />
+          </button>
+          <ProfileLink />
+        </ul>
+      </div>
+    </nav>
+  );
 }
 
 function ProfileLink(props) {
@@ -84,9 +78,9 @@ function ProfileLink(props) {
   } else {
     return (
       <div className="profile nav-item dropdown">
-        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <button className="nav-link dropdown-toggle btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {user.name}
-        </a>
+        </button>
         <div className="dropdown-menu">
           <Link to="/me" className="dropdown-item">
             <FormattedMessage

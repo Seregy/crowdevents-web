@@ -18,8 +18,8 @@ class Footer extends Component {
     return (
       <div className="footer d-flex nav navbar-expand-lg">
         <div className="language">
-          <LanguageButton locale="en" text={enText} currentLocale={locale} handler={this.changeLocale}/>
-          <LanguageButton locale="uk" text={ukText} currentLocale={locale} handler={this.changeLocale}/>
+          <LanguageButton locale="en" text={enText} currentLocale={locale} handler={this.changeLocale} />
+          <LanguageButton locale="uk" text={ukText} currentLocale={locale} handler={this.changeLocale} />
         </div>
       </div>
     );
@@ -36,7 +36,7 @@ function LanguageButton(props) {
 
   let buttonClass = "btn btn-link";
 
-  if (currentLocale == locale) {
+  if (currentLocale === locale) {
     buttonClass += " disabled";
   }
 
