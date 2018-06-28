@@ -102,7 +102,10 @@ class Project extends Component {
         projectLocation: location
       });
     }).catch(error => {
-      isLocationLoaded: true, error;
+      this.setState({
+        isLocationLoaded: true,
+        error
+      });
     })
   }
 
